@@ -14,4 +14,4 @@ RUN cd /usr/local/src/dovecot && \
     git checkout release-2.2.32 && \
     ./autogen.sh && \
     ./configure --enable-maintainer-mode --enable-devel-checks && \
-    make clean install
+    make -j clean install
