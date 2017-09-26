@@ -1,5 +1,5 @@
 #-----------------------------------------------------------------------------
-FROM ubuntu:16.04 AS base
+FROM ubuntu:16.04 AS travis-base
 LABEL maintainer="p.mauritius@tallence.com"
 
 RUN apt-get -qq update && \
