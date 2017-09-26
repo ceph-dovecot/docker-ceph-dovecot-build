@@ -1,5 +1,5 @@
 #-----------------------------------------------------------------------------
-FROM base AS build
+FROM base AS travis-build
 LABEL maintainer="p.mauritius@tallence.com"
 
 RUN cd /usr/local/src/dovecot && git checkout ${DOVECOT:-master}
