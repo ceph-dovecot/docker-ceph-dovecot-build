@@ -1,9 +1,7 @@
-FROM base:latest
-MAINTAINER Peter Mauritius <p.mauritius@tallence.com>
+#-----------------------------------------------------------------------------
+FROM base AS build
+LABEL maintainer="p.mauritius@tallence.com"
 
-RUN cd /usr/local/src/dovecot && \
-    git checkout ${DOVECOT:-master} && \
-    ./autogen.sh && \
-    ./configure --enable-maintainer-mode --enable-devel-checks && \
-    make -j clean install && \
-    make -j clean
+RUN cd /usr/local/src/dovecot && git checkout ${DOVECOT:-master}
+RUN cd /usr/local/src/dovecot && ./autogen.sh && ./configure --enable-maintainer-mode --enable-devel-checks && \
+RUN cd /usr/local/src/dovecot && make -j clean install
