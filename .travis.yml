@@ -4,8 +4,10 @@ services:
   - docker
 
 env:
-  DOVECOT=release-2.2.21
-  DOVECOT=release-2.2.32
+  - DOVECOT=release-2.2.21
+  - DOVECOT=release-2.2.32
+  - DOVECOT=master
+  - DOVECOT=master-2.2
 
 script:
   - docker build -t travis-build build
