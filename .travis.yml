@@ -12,8 +12,6 @@ script:
   - docker images
 
 after_success:
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then
-      docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-      docker tag travis-build cephdovecot/travis-build:$DOVECOT
-      docker push cephdovecot/travis-build:$DOVECOT;
-    fi
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+  - docker tag travis-build cephdovecot/travis-build:$DOVECOT
+  - docker push cephdovecot/travis-build:$DOVECOT;
