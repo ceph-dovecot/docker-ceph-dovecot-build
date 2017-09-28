@@ -8,10 +8,8 @@ env:
   DOVECOT=release-2.2.32
 
 script:
-  - docker build -t travis-base base
-  - docker images
   - docker build -t travis-build build
-  - docker tag travis-build cephdovecot/travis-base:$DOVECOT
+  - docker tag travis-build cephdovecot/travis-build:$DOVECOT
   - docker images
 
 after_success:
