@@ -7,7 +7,7 @@ RUN apt-get -qq update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -qq -y \
       build-essential apt-utils git gettext automake \
       autoconf autotools-dev libtool wget pkg-config pandoc \
-      libssl-dev librados-dev liblua5.1-0-dev
+      libssl-dev librados-dev liblua5.1-0-dev libjansson-dev
 
 RUN mkdir -p /usr/local/src
 
