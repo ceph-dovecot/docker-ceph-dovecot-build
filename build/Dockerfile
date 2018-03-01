@@ -23,6 +23,7 @@ RUN cd /usr/local/src/imaptest && git checkout $IMAPTEST
 RUN cd /usr/local/src/imaptest && ./autogen.sh && ./configure --with-dovecot=/usr/local/src/dovecot && make all
 
 ADD dovecot_config/ /usr/local/etc/
+RUN mv /usr/local/etc/dovecot.service /etc/init.d/
 RUN addgroup --system dovecot
 RUN adduser --system --no-create-home dovecot
 RUN mkdir /usr/local/var
