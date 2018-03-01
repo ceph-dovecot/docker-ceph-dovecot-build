@@ -2,7 +2,7 @@ FROM ubuntu:16.04
 LABEL maintainer="p.mauritius@tallence.com"
 ARG CEPH=v12.2.0
 ARG DOVECOT
-
+ARG IMAPTEST
 RUN apt-get -qq update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -qq -y \
       build-essential apt-utils git gettext automake \
@@ -17,3 +17,16 @@ RUN cd /usr/local/src/dovecot && git checkout $DOVECOT
 
 RUN cd /usr/local/src/dovecot && ./autogen.sh && ./configure --enable-maintainer-mode --enable-devel-checks
 RUN cd /usr/local/src/dovecot && make clean install
+
+RUN git clone https://github.com/dovecot/imaptest.git /usr/local/src/imaptest
+RUN cd /usr/local/src/imaptest && git checkout $IMAPTEST
+RUN cd /usr/local/src/imaptest && ./autogen.sh && ./configure --with-dovecot=/usr/local/src/dovecot && make all
+
+ADD build/dovecot_config/ /usr/local/etc/
+RUN addgroup --system dovecot
+RUN adduser --system --no-create-home dovecot
+RUN mkdir /usr/local/var
+RUN chown -R dovecot:dovecot /usr/local/var/
+RUN chown -R dovecot:dovecot /var/log
+RUN mkdir /root/mail 
+RUN cd /root/mail && wget http://www.dovecot.org/tmp/dovecot-crlf 
