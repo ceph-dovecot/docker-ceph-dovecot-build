@@ -10,7 +10,7 @@ env:
   - DOVECOT=master-2.2 IMAPTEST=core-2.2
   
 script:
-  - docker build --build-arg DOVECOT=$DOVECOT IMAPTEST=$IMAPTEST -t travis-build build
+  - docker build --build-arg DOVECOT=$DOVECOT --build-arg IMAPTEST=$IMAPTEST -t travis-build build
   - docker images
 
 after_success:
