@@ -22,7 +22,7 @@ RUN git clone https://github.com/dovecot/imaptest.git /usr/local/src/imaptest
 RUN cd /usr/local/src/imaptest && git checkout $IMAPTEST
 RUN cd /usr/local/src/imaptest && ./autogen.sh && ./configure --with-dovecot=/usr/local/src/dovecot && make all
 
-ADD build/dovecot_config/ /usr/local/etc/
+ADD dovecot_config/ /usr/local/etc/
 RUN addgroup --system dovecot
 RUN adduser --system --no-create-home dovecot
 RUN mkdir /usr/local/var
