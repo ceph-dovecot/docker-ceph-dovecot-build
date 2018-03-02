@@ -24,6 +24,7 @@ RUN cd /usr/local/src/imaptest && ./autogen.sh && ./configure --with-dovecot=/us
 
 ADD dovecot_config/ /usr/local/etc/
 RUN mv /usr/local/etc/dovecot.service /etc/init.d/
+RUN mv /usr/local/etc/exec.sh /usr/local/bin/exec.sh
 RUN addgroup --system dovecot
 RUN adduser --system --no-create-home dovecot
 RUN mkdir /usr/local/var
