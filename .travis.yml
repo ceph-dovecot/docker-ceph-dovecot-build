@@ -4,7 +4,7 @@ services:
   - docker
 
 env:
-  - DOVECOT=release-2.2.21 IMAPTEST=5cd80f6e33f9c9afce93bfdbf67336c07813595d
+  - DOVECOT=release-2.2.21 IMAPTEST=bb98e05dea6e1b44033c38e2681c7acb7e076073
   - DOVECOT=2.2.33.1 IMAPTEST=core-2.2
   - DOVECOT=master IMAPTEST=master
   - DOVECOT=master-2.2 IMAPTEST=core-2.2
