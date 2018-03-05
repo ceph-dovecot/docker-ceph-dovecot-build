@@ -12,7 +12,8 @@ RUN apt-get -qq update && \
       build-essential apt-utils git gettext automake \
       autoconf autotools-dev libtool wget pkg-config pandoc \
       libssl-dev librados-dev liblua5.1-0-dev libjansson-dev \ 
-      valgrind software-properties-common apt-transport-https 
+      valgrind software-properties-common apt-transport-https \
+      wget 
 
 RUN wget -q -O- 'https://download.ceph.com/keys/release.asc' | apt-key add -
 RUN apt-add-repository 'deb https://download.ceph.com/debian-luminous/ xenial main'
