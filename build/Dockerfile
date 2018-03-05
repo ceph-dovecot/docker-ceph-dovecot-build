@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:17.10
 LABEL maintainer="p.mauritius@tallence.com"
 ARG CEPH=v12.2.0
 ARG DOVECOT
@@ -11,11 +11,6 @@ RUN apt-get -qq update && \
       libssl-dev librados-dev liblua5.1-0-dev libjansson-dev \ 
       valgrind software-properties-common apt-transport-https \
       wget 
-
-RUN wget -q -O- 'https://download.ceph.com/keys/release.asc' | apt-key add -
-RUN apt-add-repository 'deb https://download.ceph.com/debian-luminous/ xenial main'
-RUN apt-get -qq update
-RUN apt-get -y install librados2
 
 RUN mkdir -p /usr/local/src
 
