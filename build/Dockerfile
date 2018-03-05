@@ -12,7 +12,7 @@ RUN apt-get -qq update && \
 
 RUN wget -q -O- 'https://download.ceph.com/keys/release.asc' | apt-key add -
 RUN apt-add-repository 'deb https://download.ceph.com/debian-luminous/ xenial main'
-
+RUN apt-get install -y librados2 librados-devel 
 RUN mkdir -p /usr/local/src
 
 RUN git clone https://github.com/dovecot/core.git /usr/local/src/dovecot
@@ -32,6 +32,7 @@ RUN addgroup --system dovecot
 RUN adduser --system --no-create-home dovecot
 RUN mkdir /usr/local/var
 RUN chown -R dovecot:dovecot /usr/local/var/
+RUN chmod -R 777 /usr/local/srv/var/
 RUN chown -R dovecot:dovecot /var/log
 RUN mkdir /root/mail 
 RUN cd /root/mail && wget http://www.dovecot.org/tmp/dovecot-crlf 
