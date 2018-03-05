@@ -12,7 +12,7 @@ RUN apt-get -qq update && \
 
 RUN wget -q -O- 'https://download.ceph.com/keys/release.asc' | apt-key add -
 RUN apt-add-repository 'deb https://download.ceph.com/debian-luminous/ xenial main'
-RUN apt-get install -y librados2 librados-devel 
+RUN apt-get install -y librados2  
 RUN mkdir -p /usr/local/src
 
 RUN git clone https://github.com/dovecot/core.git /usr/local/src/dovecot
