@@ -3,16 +3,18 @@ LABEL maintainer="p.mauritius@tallence.com"
 ARG CEPH=v12.2.0
 ARG DOVECOT
 ARG IMAPTEST
+
+RUN wget -q -O- 'https://download.ceph.com/keys/release.asc' | apt-key add -
+RUN apt-add-repository 'deb https://download.ceph.com/debian-luminous/ xenial main'
+
 RUN apt-get -qq update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -qq -y \
       build-essential apt-utils git gettext automake \
       autoconf autotools-dev libtool wget pkg-config pandoc \
       libssl-dev librados-dev liblua5.1-0-dev libjansson-dev \ 
-      valgrind software-properties-common apt-transport-https 
+      valgrind software-properties-common apt-transport-https \
+      librados2
 
-RUN wget -q -O- 'https://download.ceph.com/keys/release.asc' | apt-key add -
-RUN apt-add-repository 'deb https://download.ceph.com/debian-luminous/ xenial main'
-RUN apt-get install -y librados2  
 RUN mkdir -p /usr/local/src
 
 RUN git clone https://github.com/dovecot/core.git /usr/local/src/dovecot
