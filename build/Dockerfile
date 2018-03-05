@@ -4,9 +4,6 @@ ARG CEPH=v12.2.0
 ARG DOVECOT
 ARG IMAPTEST
 
-RUN wget -q -O- 'https://download.ceph.com/keys/release.asc' | apt-key add -
-RUN apt-add-repository 'deb https://download.ceph.com/debian-luminous/ xenial main'
-
 RUN apt-get -qq update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -qq -y \
       build-essential apt-utils git gettext automake \
@@ -18,7 +15,7 @@ RUN apt-get -qq update && \
 RUN wget -q -O- 'https://download.ceph.com/keys/release.asc' | apt-key add -
 RUN apt-add-repository 'deb https://download.ceph.com/debian-luminous/ xenial main'
 RUN apt-get -qq update
-RUN apt-get -y librados2
+RUN apt-get -y install librados2
 
 RUN mkdir -p /usr/local/src
 
