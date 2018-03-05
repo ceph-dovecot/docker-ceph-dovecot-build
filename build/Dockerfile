@@ -36,7 +36,7 @@ RUN addgroup --system dovecot
 RUN adduser --system --no-create-home dovecot
 RUN mkdir /usr/local/var
 RUN chown -R dovecot:dovecot /usr/local/var/
-RUN chmod -R 777 /usr/local/srv/var/
+RUN chmod -R 777 /usr/local/var/
 RUN chown -R dovecot:dovecot /var/log
 RUN mkdir /root/mail 
 RUN cd /root/mail && wget http://www.dovecot.org/tmp/dovecot-crlf 
