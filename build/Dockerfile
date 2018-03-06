@@ -14,6 +14,10 @@ RUN apt-get -qq update && \
 
 RUN mkdir -p /usr/local/src
 
+RUN cd /usr/local/src && wget http://www.cpan.org/src/5.0/perl-5.20.1.tar.gz
+RUN cd /usr/local/src && tar -xzf perl-5.20.1.tar.gz
+RUN cd /usr/local/src/perl-5.20.1 && ./Configure -des -Dprefix=/usr/local &&make install
+
 RUN git clone https://github.com/dovecot/core.git /usr/local/src/dovecot
 RUN cd /usr/local/src/dovecot && git checkout $DOVECOT
 
