@@ -25,10 +25,8 @@ RUN cd /usr/local/src/dovecot && ./autogen.sh && ./configure --enable-maintainer
 RUN cd /usr/local/src/dovecot && make clean install
 
 RUN git clone https://github.com/dovecot/imaptest.git /usr/local/src/imaptest
-RUN cd /usr/local/src/imaptest && git checkout $IMAPTEST
-RUN cd /usr/local/src/imaptest && ./autogen.sh && ./configure --with-dovecot=/usr/local/src/dovecot && make all
-
 ADD dovecot_config/ /usr/local/etc/
+ADD imaptest /usr/local/bin/
 RUN mv /usr/local/etc/dovecot.service /etc/init.d/
 RUN mv /usr/local/etc/exec.sh /usr/local/bin/exec.sh
 RUN addgroup --system dovecot
