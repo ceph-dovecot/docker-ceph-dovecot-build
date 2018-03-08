@@ -2,7 +2,6 @@ FROM ubuntu:17.10
 LABEL maintainer="p.mauritius@tallence.com"
 ARG CEPH=v12.2.0
 ARG DOVECOT
-ARG IMAPTEST
 
 RUN apt-get -qq update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -qq -y \
@@ -17,16 +16,17 @@ RUN mkdir -p /usr/local/src
 RUN cd /usr/local/src && wget http://www.cpan.org/src/5.0/perl-5.20.1.tar.gz
 RUN cd /usr/local/src && tar -xzf perl-5.20.1.tar.gz
 RUN cd /usr/local/src/perl-5.20.1 && ./Configure -des -Dprefix=/usr/local &&make install
-
+RUN rm /usr/local/src/perl-5.20.1.tar.gz
+RUN rm -r /usr/local/src/perl-5.20.1
 RUN git clone https://github.com/dovecot/core.git /usr/local/src/dovecot
 RUN cd /usr/local/src/dovecot && git checkout $DOVECOT
 
 RUN cd /usr/local/src/dovecot && ./autogen.sh && ./configure --enable-maintainer-mode --enable-devel-checks
 RUN cd /usr/local/src/dovecot && make clean install
 
-RUN git clone https://github.com/dovecot/imaptest.git /usr/local/src/imaptest
 ADD dovecot_config/ /usr/local/etc/
 ADD imaptest /usr/local/bin/
+
 RUN mv /usr/local/etc/dovecot.service /etc/init.d/
 RUN mv /usr/local/etc/exec.sh /usr/local/bin/exec.sh
 RUN addgroup --system dovecot
