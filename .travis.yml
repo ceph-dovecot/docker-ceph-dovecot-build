@@ -5,7 +5,7 @@ services:
 
 env:
   - DOVECOT=release-2.2.21 
-  - DOVECOT=2.2.33.1 
+  - DOVECOT=master-2.3 
   - DOVECOT=master 
   - DOVECOT=master-2.2 
   
