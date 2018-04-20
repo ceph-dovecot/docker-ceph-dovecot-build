@@ -27,7 +27,7 @@ RUN cd /usr/local/src/dovecot && make clean install
 ADD dovecot_config/ /usr/local/etc/
 ADD imaptest /usr/local/bin/
 ADD smtp-source /usr/local/bin/
-
+ADD lmtp_test_mail.tld /root/
 RUN mv /usr/local/etc/dovecot.service /etc/init.d/
 RUN mv /usr/local/etc/exec.sh /usr/local/bin/exec.sh
 RUN addgroup --system dovecot
