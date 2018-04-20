@@ -1,0 +1,33 @@
+From cras@irccrew.org  Tue Jul 23 19:39:23 2002
+Received: with ECARTIS (v1.0.0; list dovecot); Tue, 23 Jul 2002 19:39:23 +0300 (EEST)
+Return-Path: <cras@irccrew.org>
+Delivered-To: dovecot@procontrol.fi
+Received: from shodan.irccrew.org (shodan.irccrew.org [80.83.4.2])
+        by danu.procontrol.fi (Postfix) with ESMTP id 434B423848
+        for <dovecot@procontrol.fi>; Tue, 23 Jul 2002 19:39:23 +0300 (EEST)
+Received: by shodan.irccrew.org (Postfix, from userid 6976)
+        id 175FA4C0A0; Tue, 23 Jul 2002 19:39:23 +0300 (EEST)
+Date: Tue, 23 Jul 2002 19:39:23 +0300
+From: Timo Sirainen <tss@iki.fi>
+To: dovecot@procontrol.fi
+Subject: [dovecot] first test mail
+Message-ID: <20020723193923.J22431@irccrew.org>
+Mime-Version: 1.0
+Content-Disposition: inline
+User-Agent: Mutt/1.2.5i
+Content-Type: text/plain; charset=us-ascii
+X-archive-position: 1
+X-ecartis-version: Ecartis v1.0.0
+Sender: dovecot-bounce@procontrol.fi
+Errors-to: dovecot-bounce@procontrol.fi
+X-original-sender: tss@iki.fi
+Precedence: bulk
+X-list: dovecot
+X-IMAPbase: 1096038620 0000010517
+X-UID: 1                                                  
+Status: O
+
+lets see if it works
+
+
+
