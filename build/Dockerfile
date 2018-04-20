@@ -9,7 +9,7 @@ RUN apt-get -qq update && \
       autoconf autotools-dev libtool wget pkg-config pandoc \
       libssl-dev librados-dev liblua5.1-0-dev libjansson-dev \ 
       valgrind software-properties-common apt-transport-https \
-      wget 
+      wget postfix 
 
 RUN mkdir -p /usr/local/src
 
@@ -26,7 +26,6 @@ RUN cd /usr/local/src/dovecot && make clean install
 
 ADD dovecot_config/ /usr/local/etc/
 ADD imaptest /usr/local/bin/
-ADD smtp-source /usr/local/bin/
 ADD lmtp_test_mail.tld /root/
 RUN mv /usr/local/etc/dovecot.service /etc/init.d/
 RUN mv /usr/local/etc/exec.sh /usr/local/bin/exec.sh
