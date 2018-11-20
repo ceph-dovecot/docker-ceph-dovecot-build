@@ -1,4 +1,4 @@
-FROM ubuntu:17.10
+FROM ubuntu:18.04
 LABEL maintainer="p.mauritius@tallence.com"
 ARG CEPH=v12.2.0
 ARG DOVECOT
