@@ -9,7 +9,7 @@ RUN apt-get -qq update && \
       autoconf autotools-dev libtool wget pkg-config pandoc \
       libssl-dev librados-dev liblua5.1-0-dev libjansson-dev \ 
       valgrind software-properties-common apt-transport-https \
-      wget postfix 
+      wget postfix libssl1.0-dev 
 
 RUN mkdir -p /usr/local/src
 
