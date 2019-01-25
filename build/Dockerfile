@@ -9,7 +9,7 @@ RUN apt-get -qq update && \
       autoconf autotools-dev libtool wget pkg-config pandoc \
       librados-dev liblua5.1-0-dev libjansson-dev \ 
       valgrind software-properties-common apt-transport-https \
-      wget postfix libssl1.0-dev 
+      wget postfix libssl1.0-dev libz-dev 
 
 RUN mkdir -p /usr/local/src
 
@@ -21,7 +21,7 @@ RUN rm -r /usr/local/src/perl-5.22.1
 RUN git clone https://github.com/dovecot/core.git /usr/local/src/dovecot
 RUN cd /usr/local/src/dovecot && git checkout $DOVECOT
 
-RUN cd /usr/local/src/dovecot && ./autogen.sh && ./configure --enable-maintainer-mode --enable-devel-checks
+RUN cd /usr/local/src/dovecot && ./autogen.sh && ./configure --enable-maintainer-mode --enable-devel-checks --with-zlib
 RUN cd /usr/local/src/dovecot && make clean install
 
 ADD dovecot_config/ /usr/local/etc/
