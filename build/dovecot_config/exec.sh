@@ -3,16 +3,15 @@ safeRunCommand(){
   typeset ret_code
 
   eval $cmnd
-  ret_code=$?
-  if [ $ret_code ]; then
-    exit 0
+#  ret_code=$?
+  if [ $? -eq 0 ]; then
+    exit 1
   else
-     printf "$ret_code"
-     exit 1
+    exit 0
   fi
 }
 
-command="$1"
+command=$1
 safeRunCommand "$command"
 
 exit 0
