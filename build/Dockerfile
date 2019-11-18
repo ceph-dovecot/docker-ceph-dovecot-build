@@ -1,13 +1,16 @@
 FROM ubuntu:18.04
 LABEL maintainer="p.mauritius@tallence.com"
-ARG CEPH=v12.2.0
+ARG CEPH=v14.2.4
 ARG DOVECOT
+RUN wget -q -O- 'https://download.ceph.com/keys/release.asc' | apt-key add -
+RUN echo deb https://download.ceph.com/debian-nautilus/ $(lsb_release -sc) main | tee /etc/apt/sources.list.d/ceph.list
 
 RUN apt-get -qq update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -qq -y \
       build-essential apt-utils git gettext automake \
       autoconf autotools-dev libtool wget pkg-config pandoc \
       librados-dev liblua5.1-0-dev libjansson-dev \ 
+      librados2 libradospp-dev \
       valgrind software-properties-common apt-transport-https \
       wget postfix libssl1.0-dev libz-dev 
 
