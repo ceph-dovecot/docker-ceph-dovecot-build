@@ -6,7 +6,6 @@ services:
 env:
   - DOVECOT=release-2.2.21 
   - DOVECOT=master-2.3 
-  - DOVECOT=master 
   - DOVECOT=master-2.2 
   
 script:
