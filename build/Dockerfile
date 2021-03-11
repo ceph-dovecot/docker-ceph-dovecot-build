@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 LABEL maintainer="p.mauritius@tallence.com"
-ARG CEPH=v14.2.4
+ARG CEPH=v12.2.12
 ARG DOVECOT
 
 RUN apt-get -qq update && \
