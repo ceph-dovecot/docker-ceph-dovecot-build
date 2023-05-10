@@ -1,0 +1,4 @@
+[submodule "combined/imaptest"]
+	path = combined/imaptest
+	url = https://github.com/ceph-dovecot/imaptest.git
+	branch = master
