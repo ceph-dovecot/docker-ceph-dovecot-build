@@ -35,7 +35,7 @@ RUN cd /usr/local/src/dovecot && make clean install
 
 RUN git clone https://github.com/jrse/imaptest.git /usr/local/src/imaptest
 RUN cd /usr/local/src/imaptest && ./autogen.sh && ./configure --with-dovecot=/usr/local/lib/dovecot 
-RUN cd /usr/local/src/imaptest && make install && cp /usr/local/src/imaptesT/src/imaptest /usr/bin
+RUN cd /usr/local/src/imaptest && make install && cp /usr/local/src/imaptest/src/imaptest /usr/bin
 ADD entrypoint.sh /opt/ceph-container/bin/entrypoint.sh
 
 RUN ldconfig
