@@ -17,5 +17,6 @@ build:
   script:
     - cd combined
     - docker build -t $DOCKER_REGISTRY_URL/$PROJECT_NAME:${CI_COMMIT_SHA} .
+    - docker push $DOCKER_REGISTRY_URL/$PROJECT_NAME:${CI_COMMIT_SHA}
     
 
