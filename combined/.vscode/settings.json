@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "settings-parser.h": "c",
+        "typeinfo": "c"
+    }
+}

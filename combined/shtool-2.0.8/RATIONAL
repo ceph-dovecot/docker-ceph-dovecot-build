@@ -1,0 +1,129 @@
+       _     _              _
+   ___| |__ | |_ ___   ___ | |
+  / __| '_ \| __/ _ \ / _ \| |
+  \__ \ | | | || (_) | (_) | |
+  |___/_| |_|\__\___/ \___/|_|
+
+  GNU shtool -- The GNU Portable Shell Tool
+
+  RATIONAL
+  ========
+
+  The Context
+
+  For the configuration, build and installation environment of modern
+  free software packages one nowadays uses GNU autoconf, GNU automake and
+  GNU libtool. GNU autoconf covers the configuration, GNU automake covers
+  the generation of the build environment and GNU libtool covers most of
+  a libraries build process. But at least when it comes to the installa-
+  tion step one usually have to use a few auxiliary scripts like
+  "mkdir.sh", "install.sh", etc. These scripts are replacements for sys-
+  tem tools and are required mainly for portability reasons. The result
+  is usually an "etc/" subdirectory in the source tree where over time a
+  lot shell scripts accumulate.
+
+  Maintainance Problem
+
+  The problem with those "etc/" shell scripts starts if one has to main-
+  tain lots of free software packages as it's the case for the author of
+  shtool. Then over time all "etc/" directories diverge and with every
+  day it gets more and more nasty to always keep them in sync. Especially
+  if some scripts were locally adjusted because no centralized main-
+  tainance location exists, of course. For autoconf no such problem
+  exists, because the resulting "configure" script is generated
+  on-the-fly. The same applies to automake and the various "Makefile.in"
+  files.
+
+  Only for libtool one always has to grab the latest copy. But because
+  it's just two files ("ltmain.sh" and "ltconfig"), keeping a source
+  trees in sync is not too complicated (especially not if using the handy
+  "libtoolize" program). But the "etc/" shell script mess is nasty, espe-
+  cially because there is no master version on the net. Additionally
+  everytime one starts a new project, one has to establish a new source
+  tree. For a GNU hacker it's immediately clear that autoconf and friends
+  are part of the game. But which "etc/" shell scripts are needed this
+  time? And from which existing source tree to copy them from?  Hmmm...
+  the same procedure as last year?!
+
+  The Aesthetic Problem
+
+  When a free software package has a large source tree (say, more than 50
+  files and especially with one or more subdirectories) it's usually no
+  problem to have an additional "etc/" subdirectory with some scripts.
+  They then totally go down. But for smaller packages, especially those
+  living in a single source directory (a degenerated tree), some people
+  (like the author of shtool) have aesthetic problems. Because it looks
+  strange to them that 20% of the files in the source tree are just aux-
+  iliary scripts. Sure, the actual amount of script code even shtool can-
+  not reduce, but shtool merges them together into a single file and this
+  way they optically totally disappear from the source tree.
+
+  This is a pure aesthetical issue, of course. But keep in mind that
+  hacking is a piece of art. And a well layouted source tree is a piece
+  of art for real hackers, too. Oh, and for those who really insist on a
+  technical reason: it's also easier to upgrade a single file than multi-
+  ple files ;)
+
+  Filling the gap
+
+  So, wouldn't it be nice to have a fourth package (beside autoconf,
+  automake and libtool) which fills the gap, i.e. which provides the
+  functionality of the old files in "etc/", is maintained at a central-
+  ized location and even consists of just a single (perhaps large) script
+  one can threat as a black box the same way one already does this for
+  libtool? The author thought this would be actually very useful and the
+  result is the current GNU shtool package which at least successfully
+  solved the above problems of the author.
+
+  The goals in detail
+
+  To better understand the intentions behind shtool and to avoid confu-
+  sion, here are the original goals of the shtool script:
+
+  1. It has to be self-contained and reside in a single file
+     This was achieved by compiling the resulting shtool script out of
+     the ingredient source scripts. The advantage is that shtool is still
+     easily maintainable, because one can test each script separately.
+     But the final functionality then resides in an all-in-one script
+     which can be easily spread over multiple source trees.
+
+  2. It has to cover all functionality of the old scripts
+     This was achieved by (re)implementing really all functionality which
+     experience showed is important in source trees of typical free soft-
+     ware packages.
+
+  3. It has to be maximum portable over all Unix flavors
+     This was achieved by basing the ingredient shell scripts only on
+     well-proven code which already survived practice in other projects
+     over more than a few months. Especially this means that a lot of
+     complicated emulations are done to avoid the use of unportable Unix
+     programs (like "fmt", "tr", etc) or unportable features of well-
+     known Unix programs (like shell functions, special "sed" features,
+     etc. pp). That's why shtool's code sometimes looks crazy and like
+     overkill to you. Don't think this is because of the authors crazy-
+     ness. Instead it's most of the time mainly for portability reasons.
+
+  4. It has to be clean and fully documented
+     This was achieved by reimplementing too ugly functionality from
+     scratch and cleaning up old shell script code plus writing a com-
+     plete set of manual pages.
+
+  5. It has to stay under a reasonable and common license
+     This was achieved by placing the shtool package under the GNU Gen-
+     eral Public License (GPL). This way the shtool package itself is
+     well protected and is guarrantied to be kept free software, but the
+     resulting shtool script can be nevertheless used in all types of
+     source trees. Notice here: given that one includes GNU shtool verba-
+     tim into an own source tree, one is justified in saying that it
+     remains separate from the own package, and that this way one is sim-
+     ply just using shtool. So, in this situation, there is no require-
+     ment that the package itself is licensed under the GNU General Pub-
+     lic License in order to take advantage of shtool. Keep this in mind
+     ;)
+
+  6. It has to be modularized for flexibility reasons
+     This was achieved by using an auxiliary tool shtoolize(1) which can
+     be used to build individual "shtool" scripts out of the ingredient
+     shell scripts. This way if one don't need all the available func-
+     tionality one can assemble together an individual "shtool" script.
+

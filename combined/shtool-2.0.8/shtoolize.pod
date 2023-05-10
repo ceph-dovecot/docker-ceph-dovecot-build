@@ -1,0 +1,127 @@
+##
+##  shtoolize.pod -- Manual Page for shtoolize in POD format
+##  Copyright (c) 1999-2008 Ralf S. Engelschall <rse@engelschall.com>
+##
+##  This file is part of shtool and free software; you can redistribute
+##  it and/or modify it under the terms of the GNU General Public
+##  License as published by the Free Software Foundation; either version
+##  2 of the License, or (at your option) any later version.
+##
+##  This file is distributed in the hope that it will be useful,
+##  but WITHOUT ANY WARRANTY; without even the implied warranty of
+##  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+##  General Public License for more details.
+##
+##  You should have received a copy of the GNU General Public License
+##  along with this program; if not, write to the Free Software
+##  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
+##  USA, or contact Ralf S. Engelschall <rse@engelschall.com>.
+##
+
+=pod
+
+=head1 NAME
+
+B<shtoolize> - Build individual GNU shtool scripts
+
+=head1 VERSION
+
+GNU shtool SHTOOL_VERSION_STR
+
+=head1 SYNOPSIS
+
+B<shtoolize>
+[B<-h>]
+[B<-v>]
+[B<-q>]
+[B<-o> I<script>]
+I<module>
+[ I<module> ... ]
+
+=head1 DESCRIPTION
+
+The B<shtoolize> program builds individual GNU B<shtool> scripts (written to
+the default output file C<shtool> or to the specified I<script>) out of one or
+more B<shtool> ingredient I<module>s.  Available I<module>s are:
+
+ echo       Print string with optional construct expansion
+ mdate      Pretty-print modification time of a file or dir
+ table      Pretty print a field-separated list as a table
+ prop       Display progress with a running propeller
+ move       Move files with simultan substitution
+ install    Install a program, script or datafile
+ mkdir      Make one or more directories
+ mkln       Make link with calculation of relative paths
+ mkshadow   Make a shadow tree
+ fixperm    Fix file permissions inside a source tree
+ rotate     Rotate a logfile
+ tarball    Roll distribution tarballs
+ subst      Apply sed(1) substitution operations
+ platform   Platform identification utility
+ arx        Extended archive command
+ slo        Separate linker options by library class
+ scpp       Sharing C Pre-Processor
+ version    Generate and maintain a version information file
+ path       Deal with program paths
+
+Additionally there is a pseudo-module ``C<all>'' which can be used as a
+short-hand for ``C<echo mdate table prop move install mkdir mkln mkshadow
+fixperm platform arx slo scpp version path>'', i.e. to build a B<shtool> script
+with all modules in the standard order. An installed B<shtool> is usually
+built this way via ``C<shtoolize -o shtool all>''.
+
+Use the B<shtoolize> program to build individual B<shtool> scripts in case you
+want a smaller sized script and you don't need all of the available B<shtool>
+functionality.  For instance for the classical B<Autoconf> based free software
+package a C<shtool> script build via ``C<shtoolize -o shtool install mkdir>''
+might be sufficient.
+
+=head1 OPTIONS
+
+The following command line options exist:
+
+=over 4
+
+=item B<-h>
+
+Displays a short help page describing the usage of B<shtoolize>.
+
+=item B<-v>
+
+Displays the version number of B<shtoolize>/B<shtool>.
+
+=item B<-q>
+
+Displays no processing information.
+
+=item B<-o> I<script>
+
+Writes the output to file I<script> instead to file ``C<shtool>''.
+
+=back
+
+=head1 EXAMPLE
+
+The typical free software package which is based on GNU B<libtool> and GNU
+B<shtool> one uses a C<Makefile> entry like the following:
+
+ #   Makefile entry for upgrading GNU tools
+ upgrade-tools:
+     libtoolize -f -c
+     shtoolize -q all
+
+This upgrades the three files C<ltmain.sh>, C<ltconfig> and C<shtool> in the
+current source tree to the latest versions.
+
+=head1 SEE ALSO
+
+shtool(1).
+
+=head1 AUTHOR
+
+ Ralf S. Engelschall
+ rse@engelschall.com
+ www.engelschall.com
+
+=cut
+

@@ -1,0 +1,21 @@
+
+variables:
+  DOCKER_REGISTRY_URL: "192.168.178.73:6088"
+  LC_ALL: "en_US.UTF-8"
+  LANG: "en_US.UTF-8"
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: ""
+  PROJECT_NAME: ceph-dovecot-combined
+  GIT_SUBMODULE_STRATEGY: recursive
+
+stages:
+  - build
+
+build:
+  stage: build
+  tags: ["shell"]
+  script:
+    - cd combined
+    - docker -t $DOCKER_REGISTRY_URL:$PROJECT_NAME:${CI_COMMIT_SHA} .
+    
+

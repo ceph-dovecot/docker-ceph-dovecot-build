@@ -1,0 +1,50 @@
+       _     _              _
+   ___| |__ | |_ ___   ___ | |
+  / __| '_ \| __/ _ \ / _ \| |
+  \__ \ | | | || (_) | (_) | |
+  |___/_| |_|\__\___/ \___/|_|
+
+  GNU shtool -- The GNU Portable Shell Tool
+  ____________________________________________________________________
+
+  THANKS
+
+  Credit has to be given to the following people who contributed ideas,
+  stuff, bugfixes, hints etc. (in alphabetical order):
+
+  o Denis Barbier            <barbier@imacs.polytechnique.fr>
+  o Marcus Boerger           <marcus.boerger@t-online.de>
+  o Bill Campbell            <bill@celestial.com>
+  o R. N. de Arenas Coronado <privado@dervishd.net>
+  o Paul Eggert              <eggert@twinsun.com>
+  o Alan Eldridge            <alane@geeksrus.net>
+  o Michael van Elst         <mlelstv@serpens.de>
+  o Scott R. Every           <scott@emji.net>
+  o Mike Frysinger           <vapier@gentoo.org>
+  o Daniel Richard G.        <straker@MIT.EDU>
+  o Dean Gaudet              <dgaudet@arctic.org>
+  o Henri Gomez              <henri.gomez@gmail.com>
+  o Lars Hecking             <lhecking@nmrc.ucc.ie>
+  o Manuel Hendel            <manuel@hendel.net>
+  o Sakagami Hiroki          <sakagami@gmail.com>
+  o Jim Jagielski            <jim@jaguNET.com>
+  o Martin Kraemer           <Martin.Kraemer@MchP.Siemens.De>
+  o Thomas Linden            <tom@izb.net>
+  o Mirko Liss               <mirko.liss@web.de>
+  o Liones                   <liones@myrealbox.com>
+  o Thomas Lotterer          <thomas@lotterer.net>
+  o Markus F.X.J. Oberhumer  <markus.oberhumer@jk.uni-linz.ac.at>
+  o James Rowe               <jnrowe@ukfsn.org>
+  o Benjamin Saller          <case@appliedtheory.com>
+  o Michael Schloh           <michael@schloh.com>
+  o Christoph Schug          <chris@schug.net>
+  o Sascha Schumann          <sascha@schumann.cx>
+  o Yitzchak Scott-Thoennes  <sthoenna@efn.org>
+  o Stefan Seefeld           <stefan@fresco.org>
+  o Peter Simons             <simons@cys.de>
+  o Evgeny Stambulchik       <fnevgeny@plasma-gate.weizmann.ac.il>
+  o Gopal Narayanan          <gopal@fcrao1.phast.umass.edu>
+  o Miles Egan               <miles@pixar.com>
+
+  ...and all other shtool users who gave me feedback but I've forgot.
+

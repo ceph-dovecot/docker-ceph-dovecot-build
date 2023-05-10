@@ -1,0 +1,47 @@
+       _     _              _
+   ___| |__ | |_ ___   ___ | |
+  / __| '_ \| __/ _ \ / _ \| |
+  \__ \ | | | || (_) | (_) | |
+  |___/_| |_|\__\___/ \___/|_|
+
+  GNU shtool -- The GNU Portable Shell Tool
+  ____________________________________________________________________
+
+  INSTALLATION
+
+  Usually you want to use shtool inside the source tree of your own free
+  software package (say it stays under /path/to/mypkg). For this you first
+  have compile the `shtool' script and then just copy it over to your own
+  source tree. To achieve this run in your shell:
+
+    $ ./configure
+    $ make
+    $ make test
+    $ cp shtool /path/to/mypkg/shtool
+
+  Additionally you can use `shtoolize' to first assemble a custom `shtool'
+  script (here with the modules `install', `mkdir' and `tarball':
+
+    $ ./configure
+    $ make
+    $ make test
+    $ shtoolize install mkdir tarball
+    $ cp shtool /path/to/mypkg/shtool
+
+  Also please notice the license terms which apply to the generated shtool
+  program. You can find them at the top of the generated shtool program file.
+
+  Alternatively you can also install shtool in a system wide location (for
+  easier upgrading from there or to make shtool available for users from
+  within the shell). To install shtool into /path/to/shtool/{bin,man}/ perform
+  the following steps in your shell:
+
+    $ ./configure --prefix=/path/to/shtool
+    $ make
+    $ make test
+    $ make install
+
+  Please keep in mind that although the building of `shtool' requires Perl 5
+  the generated `shtool' script does _NOT_ require Perl under runtime, of
+  course.
+

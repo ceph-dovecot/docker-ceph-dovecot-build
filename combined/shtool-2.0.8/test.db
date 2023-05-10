@@ -1,0 +1,219 @@
+##
+##  test.db -- GNU shtool test suite (minimalistic)
+##  Copyright (c) 1999-2008 Ralf S. Engelschall <rse@engelschall.com>
+##
+
+@begin{echo}
+test ".`shtool echo foo bar quux`" = ".foo bar quux"
+bytes=`shtool echo -n foo | wc -c | awk '{ printf("%s", $1); }'`
+test ".$bytes" = .3
+bytes=`shtool echo '\1' | wc -c | awk '{ printf("%s", $1); }'`
+test ".$bytes" = .3
+@end{echo}
+
+@begin{mdate}
+#   cannot be checked easily, so just start it
+shtool mdate /
+@end{mdate}
+
+@begin{table}
+echo "foo   bar  " >tab1
+echo "baz   quux " >>tab1
+shtool table -F: -c2 -w5 "foo:bar:baz:quux" >tab2
+cmp tab1 tab2
+@end{table}
+
+@begin{prop}
+#   cannot be checked easily, so just start it
+(echo 1; echo 2; echo 3) | shtool prop -p foo
+@end{prop}
+
+@begin{move}
+echo foo >bar
+shtool move bar quux
+test ! -f bar
+test -f quux
+test ".`cat quux`" = .foo
+@end{move}
+
+@begin{install}
+echo foo >bar
+shtool install -m 644 -c bar quux
+test -f bar
+test -f quux
+test ".`cat quux`" = .foo
+shtool install -C bar quux
+test -f bar
+test -f quux
+test ".`cat quux`" = .foo
+shtool install bar quux
+test ! -f bar
+test -f quux
+test ".`cat quux`" = .foo
+@end{install}
+
+@begin{mkdir}
+shtool mkdir a
+test -d a
+shtool mkdir a/b
+test -d a/b
+shtool mkdir -p c/d/e/f/g
+test -d c/d/e/f/g
+@end{mkdir}
+
+@begin{mkln}
+mkdir a
+mkdir a/b
+echo "foo" >a/b/c
+mkdir x
+mkdir x/y
+shtool mkln -s a/b x/y
+test -r x/y/b/c
+rm x/y/b
+shtool mkln -s a/b/c x/y/d
+test -r x/y/d
+test ".`cat x/y/d`" = .foo
+@end{mkln}
+
+@begin{mkshadow}
+mkdir a
+mkdir a/b
+mkdir a/b/c
+echo foo >a/b/c/d
+echo bar >a/b/c/e
+mkdir x
+shtool mkshadow -a a x/y
+test -r x/y/b/c/d
+test -r x/y/b/c/e
+test ".`cat x/y/b/c/d`" = .foo
+test ".`cat x/y/b/c/e`" = .bar
+@end{mkshadow}
+
+@begin{fixperm}
+#   cannot be checked easily, so just start it
+echo foo >a
+echo bar >b
+shtool fixperm *
+shtool fixperm .
+@end{fixperm}
+
+@begin{rotate}
+echo foo >foo
+shtool rotate -n2 foo
+shtool rotate -n2 foo
+shtool rotate -n2 foo
+@end{rotate}
+
+@begin{tarball}
+#   cannot be checked easily, so just start it
+shtool tarball -o test .
+@end{tarball}
+
+@begin{subst}
+echo fooAfoo >foo
+echo barBbar >bar
+echo bazCbaz >baz
+shtool subst \
+    -e 's;^\(...\)\([A-Z]\)\(.*\)$;\1\2\3\2;' \
+    -e 's;^...;;' -b.original foo bar baz
+test -f foo.original
+test -f bar.original
+test -f baz.original
+test ".`cat foo.original`" = ".fooAfoo"
+test ".`cat bar.original`" = ".barBbar"
+test ".`cat baz.original`" = ".bazCbaz"
+test -f foo
+test -f bar
+test -f baz
+test ".`cat foo`" = ".AfooA"
+test ".`cat bar`" = ".BbarB"
+test ".`cat baz`" = ".CbazC"
+@end{subst}
+
+@begin{platform}
+#   cannot be checked easily, so just start it
+shtool platform
+@end{platform}
+
+@begin{arx}
+echo foo >foo.o
+echo bar >bar.o
+shtool arx -t rc lib1.a foo.o bar.o
+echo baz >baz.o
+echo quux >quux.o
+shtool arx rc lib2.a baz.o quux.o
+shtool arx rc lib3.a lib1.a lib2.a
+rm foo.o bar.o baz.o quux.o lib1.a lib2.a
+shtool arx x lib3.a
+test -f foo.o
+test -f bar.o
+test -f baz.o
+test -f quux.o
+test ! -f lib1.a
+test ! -f lib2.a
+@end{arx}
+
+@begin{slo}
+#   cannot be checked easily, so just start it
+shtool slo -- -L. -lc
+@end{slo}
+
+@begin{scpp}
+echo "foo1" >foo.c
+echo "#if foo" >>foo.c
+echo "foo2" >>foo.c
+echo "#endif /* foo */" >>foo.c
+echo "foo3" >>foo.c
+echo "void foo2a(void)" >>foo.c
+echo "{" >>foo.c
+echo "return;" >>foo.c
+echo "}" >>foo.c
+echo "intern void foo2b(void)" >>foo.c
+echo "{" >>foo.c
+echo "return;" >>foo.c
+echo "}" >>foo.c
+echo "void foo2c(void)" >>foo.c
+echo "{" >>foo.c
+echo "return;" >>foo.c
+echo "}" >>foo.c
+echo "foo5" >>foo.c
+echo "bar1" >bar.h
+echo "marker" >>bar.h
+echo "bar2" >>bar.h
+shtool scpp -Cintern -Mmarker -Dfoo -oquux.h -tbar.h foo.c
+test ".`grep foo1 quux.h`" = .
+test ".`grep foo2 quux.h`" != .
+test ".`grep foo3 quux.h`" = .
+test ".`grep __foo2a quux.h`" = .
+test ".`grep __foo2b quux.h`" != .
+test ".`grep __foo2c quux.h`" = .
+@end{scpp}
+
+@begin{version}
+shtool version -ltxt -s 1.2.3 version.txt
+test ".`shtool version -ltxt -dshort version.txt`" = ".1.2.3"
+shtool version -ltxt -il version.txt
+test ".`shtool version -ltxt -dshort version.txt`" = ".1.2.4"
+shtool version -ltxt -ir version.txt
+test ".`shtool version -ltxt -dshort version.txt`" = ".1.3.0"
+shtool version -ltxt -iv version.txt
+test ".`shtool version -ltxt -dshort version.txt`" = ".2.0.0"
+shtool version -lc -s 1.2.3 version.c
+test ".`shtool version -ltxt -dshort version.c`" = ".1.2.3"
+shtool version -lc -il version.c
+test ".`shtool version -ltxt -dshort version.c`" = ".1.2.4"
+@end{version}
+
+@begin{path}
+shtool path -s ls
+test $? -eq 0
+test "x`shtool path -r a/b/c`" = "x../../.."
+test "x`shtool path -d a/b/c`" = "xa/b"
+test "x`shtool path -d a/b/c/`" = "xa/b/c"
+test "x`shtool path -b a/b/c`" = "xc"
+echo '#!/bin/sh' >foo.sh
+echo 'true' >>foo.sh
+chmod a+x foo.sh
+test "x`shtool path -p $PATH:. foo.sh`" = "x./foo.sh"
+@end{path}
+

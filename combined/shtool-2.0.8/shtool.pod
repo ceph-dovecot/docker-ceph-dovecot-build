@@ -1,0 +1,201 @@
+##
+##  shtool.pod -- Manual Page for shtool in POD format
+##  Copyright (c) 1999-2008 Ralf S. Engelschall <rse@engelschall.com>
+##
+##  This file is part of shtool and free software; you can redistribute
+##  it and/or modify it under the terms of the GNU General Public
+##  License as published by the Free Software Foundation; either version
+##  2 of the License, or (at your option) any later version.
+##
+##  This file is distributed in the hope that it will be useful,
+##  but WITHOUT ANY WARRANTY; without even the implied warranty of
+##  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+##  General Public License for more details.
+##
+##  You should have received a copy of the GNU General Public License
+##  along with this program; if not, write to the Free Software
+##  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
+##  USA, or contact Ralf S. Engelschall <rse@engelschall.com>.
+##
+
+=pod
+
+=head1 NAME
+
+B<GNU shtool> - The GNU Portable Shell Tool
+
+=head1 VERSION
+
+GNU shtool SHTOOL_VERSION_STR
+
+=head1 SYNOPSIS
+
+B<shtool>
+[ I<global_options> ]
+I<command>
+[ I<command_options> ]
+[ I<command_args> ]
+
+=head1 DESCRIPTION
+
+B<GNU shtool> is a compilation of small but very stable and portable shell
+scripts into a single shell tool. All ingredients were in successful use over
+many years in various free software projects. The compiled B<shtool> script is
+intended to be used inside the source tree of those free software packages.
+There it can take over various (usually non-portable) tasks related to the
+building and installation of such packages.
+
+=head1 GLOBAL OPTIONS
+
+The following I<global options> are available for B<shtool>. Any I<command>s
+are ignored if one of them is present on the B<shtool> command line.
+
+=over 4
+
+=item B<-h>, B<--help>
+
+Displays a short help page describing the usage of B<shtool> and it's
+ingredient I<command>s in a compact way.
+
+=item B<-v>, B<--version>
+
+Displays the version number of B<shtool>.
+
+=item B<-d>, B<--debug>
+
+Displays shell trace messages for debugging purposes.
+
+=item B<-r>, B<--recreate>
+
+Recreate the B<shtool> script with its own individual shtoolize(1) call.
+
+=back
+
+=head1 COMMANDS
+
+The following I<command>s are provided by B<shtool>. They are all called
+via "C<shtool> I<command>". Any command options I<command_opts> and
+arguments I<command_args> are specific to the particular I<command> and
+are described in the corresponding manual page B<shtool_>I<command>(1).
+The commands are listed here sorted by topic, i.e., related commands are
+listed side-by-side.
+
+=over 16
+
+=item B<echo>
+
+echo(1) style print command providing special expansion constructs (terminal
+bold mode, environment details, date) and newline control.
+
+=item B<mdate>
+
+Pretty-printing of the last modification time of a file or directory.
+
+=item B<table>
+
+Pretty-printing a field-separated list as a two-dimensional table.
+
+=item B<prop>
+
+Displaying of a processing indication though a running terminal
+character propeller.
+
+=item B<move>
+
+mv(1) style command for renaming/moving multiple files at once and
+allowing source files just to be deleted if contents did not change.
+
+=item B<install>
+
+install(1) style command for installing a program, script or data file
+in a portable way.
+
+=item B<mkdir>
+
+mkdir(1) style command providing support for automatical parent
+directory creation, directory permission control and smart skipping if
+directory already exists.
+
+=item B<mkln>
+
+ln(1) style command providing automatic calculation and usage of relative
+links if possible.
+
+=item B<mkshadow>
+
+Creation of a shadow filesystem tree by the help of symbolic links.
+
+=item B<fixperm>
+
+Fixing of file permissions in a source tree by cleaning up the
+permission bits.
+
+=item B<rotate>
+
+Rotate a logfile.
+
+=item B<tarball>
+
+Roll standardized distribution tarballs.
+
+=item B<subst>
+
+Apply sed(1) substitution operations.
+
+=item B<platform>
+
+Determines platform identification information.
+
+=item B<arx>
+
+Extended archive command which can even put existing archives into an archive.
+
+=item B<slo>
+
+Separate linker options by library class.
+
+=item B<scpp>
+
+An additional C source file pre-processor for sharing cpp(1) code, internal
+variables and internal functions.
+
+=item B<version>
+
+Maintain a version information file in either Text, C/C++, Perl or Python.
+format.
+
+=item B<path>
+
+Deal with shell path variables.
+
+=back
+
+=head1 SEE ALSO
+
+shtoolize(1), shtool-arx(1), shtool-echo(1), shtool-fixperm(1),
+shtool-install(1), shtool-mdate(1), shtool-mkdir(1), shtool-mkln(1),
+shtool-mkshadow(1), shtool-move(1), shtool-path(1), shtool-platform(1),
+shtool-prop(1), shtool-rotate(1), shtool-scpp(1), shtool-slo(1),
+shtool-subst(1), shtool-table(1), shtool-tarball(1), shtool-version(1).
+
+=head1 HISTORY
+
+Some scripts contained in GNU B<shtool> were already written in 1994 by
+I<Ralf S. Engelschall> for use inside some private source trees. Then
+they evolved into more elaborated versions over the years and were used
+in various free software projects like ePerl, WML, iSelect, gFONT, etc.
+They were complemented with other scripts from the author which he wrote
+in March 1998 for the ``Apache Autoconf-style Interface'' (APACI) for
+Apache 1.3. In April 1999 the B<shtool> package was created out of the
+accumulated master versions of the scripts and in June 1999 it entered
+the status of an official GNU program and this way finally joined the
+group of GNU B<autoconf>, GNU B<automake> and GNU B<libtool>.
+
+=head1 AUTHOR
+
+ Ralf S. Engelschall
+ rse@engelschall.com
+ www.engelschall.com
+
+=cut
+

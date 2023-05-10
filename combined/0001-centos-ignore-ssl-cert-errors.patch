@@ -1,0 +1,59 @@
+From 43b3edf37ab9c0b8295b2b614a09ca181c841f03 Mon Sep 17 00:00:00 2001
+From: Jan Radon <j.radon@tallence.com>
+Date: Mon, 2 Jan 2023 12:08:39 +0100
+Subject: [PATCH] centos ignore ssl cert errors
+
+---
+ autogen.sh              | 2 +-
+ src/lib-fts/Makefile.am | 4 ++--
+ src/lib/Makefile.am     | 2 +-
+ 3 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/autogen.sh b/autogen.sh
+index 878901855c..5ead414eb3 100755
+--- a/autogen.sh
++++ b/autogen.sh
+@@ -16,7 +16,7 @@ done
+ 
+ if test ! -f doc/wiki/Authentication.txt; then
+   cd doc
+-  wget https://www.dovecot.org/tmp/wiki2-export.tar.gz
++  wget https://www.dovecot.org/tmp/wiki2-export.tar.gz --no-check-certificate
+   tar xzf wiki2-export.tar.gz
+   if [ $? != 0 ]; then
+     echo "Failed to uncompress wiki docs"
+diff --git a/src/lib-fts/Makefile.am b/src/lib-fts/Makefile.am
+index 1b100701d5..77410b3633 100644
+--- a/src/lib-fts/Makefile.am
++++ b/src/lib-fts/Makefile.am
+@@ -44,12 +44,12 @@ EXTRA_DIST = \
+ 	stopwords/stopwords_malformed.txt
+ 
+ $(srcdir)/WordBreakProperty.txt:
+-	test -f $@ || wget -O $@ https://dovecot.org/res/WordBreakProperty.txt
++	test -f $@ || wget -O $@ https://dovecot.org/res/WordBreakProperty.txt --no-check-certificate
+ $(srcdir)/word-boundary-data.c: $(srcdir)/word-properties.pl $(srcdir)/WordBreakProperty.txt
+ 	perl $(srcdir)/word-properties.pl boundaries $(srcdir)/WordBreakProperty.txt > $@
+ 
+ $(srcdir)/PropList.txt:
+-	test -f $@ || wget -O $@ https://dovecot.org/res/PropList.txt
++	test -f $@ || wget -O $@ https://dovecot.org/res/PropList.txt --no-check-certificate
+ $(srcdir)/word-break-data.c: $(srcdir)/word-properties.pl $(srcdir)/PropList.txt
+ 	perl $(srcdir)/word-properties.pl breaks $(srcdir)/PropList.txt > $@
+ 
+diff --git a/src/lib/Makefile.am b/src/lib/Makefile.am
+index d9f4345ce0..72eb589bd1 100644
+--- a/src/lib/Makefile.am
++++ b/src/lib/Makefile.am
+@@ -31,7 +31,7 @@ YACC=/bin/false
+ event-filter-parser.h: event-filter-parser.c
+ 
+ $(srcdir)/UnicodeData.txt:
+-	test -f $@ || wget -O $@ https://dovecot.org/res/UnicodeData.txt
++	test -f $@ || wget -O $@ https://dovecot.org/res/UnicodeData.txt  --no-check-certificate
+ 
+ $(srcdir)/unicodemap.c: $(srcdir)/unicodemap.pl $(srcdir)/UnicodeData.txt
+ 	perl $(srcdir)/unicodemap.pl < $(srcdir)/UnicodeData.txt > $@
+-- 
+2.34.1
+
