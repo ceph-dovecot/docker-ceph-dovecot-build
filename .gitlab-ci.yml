@@ -16,6 +16,6 @@ build:
   tags: ["shell"]
   script:
     - cd combined
-    - docker build -t $DOCKER_REGISTRY_URL:$PROJECT_NAME:${CI_COMMIT_SHA} .
+    - docker build -t $DOCKER_REGISTRY_URL/$PROJECT_NAME:${CI_COMMIT_SHA} .
     
 
