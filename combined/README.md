@@ -14,7 +14,7 @@ and testing the dovecot ceph plugin.
 
 ## How To
 
-docker build -t ceph-dovecot-combined:<your-version-here> .
+docker build -t ceph-dovecot-combined:your-version-here .
 
 
 ## usage
@@ -22,7 +22,7 @@ docker build -t ceph-dovecot-combined:<your-version-here> .
 - git clone the ceph-dovecot plugin locally.
 - go to the cloned ceph-plugin directory and execute the docker run command.
 
-docker run -d --name ceph_dovecot_combined --mount type=tmpfs,destination=/etc/ceph -v $(pwd):/repo -p 10143:10143 -e MON_IP=127.0.0.1 -e CEPH_PUBLIC_NETWORK=127.0.0.0/24 -e CEPH_DEMO_UID=test_uuid ceph-dovecot-combined:<your-version-here> demo
+docker run -d --name ceph_dovecot_combined --mount type=tmpfs,destination=/etc/ceph -v $(pwd):/repo -p 10143:10143 -e MON_IP=127.0.0.1 -e CEPH_PUBLIC_NETWORK=127.0.0.0/24 -e CEPH_DEMO_UID=test_uuid ceph-dovecot-combined:your-version-here demo
 
 
 - exec into the container and go to the /repo directory
