@@ -2,6 +2,7 @@ FROM ceph/daemon:v4.0.22-stable-4.0-nautilus-centos-7-x86_64
 LABEL maintainer="jan.radon@jaraco.de"
 ARG CEPH=v15.2.16
 ARG DOVECOT=2.3.15
+#ARG DOVECOT=2.2.36
 
 RUN yum-config-manager --disable tcmu-runner
 RUN yum-config-manager --disable tcmu-runner-noarch
@@ -20,7 +21,7 @@ ADD shtool-2.0.8/ /root/shtool
 ADD 0001-centos-ignore-ssl-cert-errors.patch /root/
 RUN git clone https://github.com/dovecot/core.git /usr/local/src/dovecot
 RUN cd /usr/local/src/dovecot && git checkout ${DOVECOT}
-RUN cd /usr/local/src/dovecot && git config --global user.email "jan.radon@tallence.com"
+RUN cd /usr/local/src/dovecot && git config --global user.email "jan.radon@jaraco.de"
 RUN cd /usr/local/src/dovecot && git config --global user.name "jan radon"
 RUN cd /usr/local/src/dovecot && git am < /root/0001-centos-ignore-ssl-cert-errors.patch 
 
