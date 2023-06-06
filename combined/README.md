@@ -27,4 +27,9 @@ docker run -d --name ceph_dovecot_combined --mount type=tmpfs,destination=/etc/c
 
 - exec into the container and go to the /repo directory
 - build the plugin as described in the (ceph-plugin) .gitlab-ci.yaml file
+    - ./autogen.sh
+    - ./configure --with-dovecot=/usr/local/lib/dovecot --enable-maintainer-mode --enable-debug --with-integration-tests --enable-valgrind --enable-debug
+    - make clean install        
+    - ./setup.sh
+    - dovecot    
 - you can run the imaptest and connect to the container by using imap localhost:1024
