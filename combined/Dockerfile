@@ -1,7 +1,7 @@
 FROM ceph/daemon:v4.0.22-stable-4.0-nautilus-centos-7-x86_64
 LABEL maintainer="jan.radon@jaraco.de"
 ARG CEPH=v15.2.16
-ARG DOVECOT=2.3.15
+ARG DOVECOT=2.3.20
 #ARG DOVECOT=2.2.36
 
 RUN yum-config-manager --disable tcmu-runner
