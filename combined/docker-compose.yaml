@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  ceph-demo:
+    #image: quay.io/ceph/demo
+    build: .
+    container_name: ceph-demo
+    privileged: true
+    #volumes:
+    #  - /mnt/ceph:/var/lib/ceph
+    environment:
+      - RGW_FRONTEND_TYPE=beast
+      - DEBUG=verbose
+      - RGW_FRONTEND_PORT=8000
+      - MON_IP=127.0.0.1
+      - CEPH_PUBLIC_NETWORK=0.0.0.0/0
+      - CLUSTER=ceph
+      - CEPH_DEMO_UID=demo
+      - CEPH_DEMO_ACCESS_KEY=G1EZ5R4K6IJ7XUQKMAED
+      - CEPH_DEMO_SECRET_KEY=cNmUrqpBKjCMzcfqG8fg4Qk07Xkoyau52OmvnSsz
+      - CEPH_DEMO_BUCKET=foobar
+      - SREE_PORT=5001
+      - DATA_TO_SYNC=/etc/modprobe.d
+      - DATA_TO_SYNC_BUCKET=github
+      - OSD_COUNT=3
+    ports:
+      - "8000:8000"
+      - "5001:5001"
+    restart: unless-stopped
