@@ -1,6 +1,6 @@
 FROM cephdovecot/travis-base AS travis-ceph
 LABEL maintainer="p.mauritius@tallence.com"
-ARG CEPH=v12.2.0
+ARG CEPH=v18.2.4
 
 RUN git clone https://github.com/ceph/ceph.git /usr/local/src/ceph
 RUN cd /usr/local/src/ceph && git pull && git checkout $CEPH

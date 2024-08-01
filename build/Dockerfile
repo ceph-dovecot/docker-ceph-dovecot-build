@@ -1,33 +1,34 @@
-FROM ubuntu:18.04
+FROM ubuntu:22.04
 LABEL maintainer="p.mauritius@tallence.com"
-ARG CEPH=v12.2.12
-ARG DOVECOT
+ARG CEPH=v18.2.4
+ARG DOVECOT_BASE=2.3
+ARG DOVECOT=2.3.21
+ARG PERL=5.40.0
 
 RUN apt-get -qq update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -qq -y \
       build-essential apt-utils git gettext automake \
-      autoconf autotools-dev libtool wget pkg-config pandoc \
-      liblua5.1-0-dev libjansson-dev \ 
-      valgrind software-properties-common apt-transport-https \
-      wget postfix libssl1.0-dev libz-dev 
+      autoconf autotools-dev libtool wget pkg-config pandoc liblua5.1-0-dev libjansson-dev valgrind software-properties-common apt-transport-https wget postfix libssl-dev libz-dev 
 
 RUN wget -q -O- 'https://download.ceph.com/keys/release.asc' | apt-key add -
-RUN echo deb https://download.ceph.com/debian-nautilus/ $(lsb_release -sc) main | tee /etc/apt/sources.list.d/ceph.list
+RUN echo deb https://download.ceph.com/debian-reef/ $(lsb_release -sc) main | tee /etc/apt/sources.list.d/ceph.list
 RUN apt-get -qq update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -qq -y \
     librados-dev librados2 libradospp-dev
 
 RUN mkdir -p /usr/local/src
 
-RUN cd /usr/local/src && wget http://www.cpan.org/src/5.0/perl-5.22.1.tar.gz
-RUN cd /usr/local/src && tar -xzf perl-5.22.1.tar.gz
-RUN cd /usr/local/src/perl-5.22.1 && ./Configure -des -Dprefix=/usr/local &&make install
-RUN rm /usr/local/src/perl-5.22.1.tar.gz
-RUN rm -r /usr/local/src/perl-5.22.1
-RUN git clone https://github.com/dovecot/core.git /usr/local/src/dovecot
-RUN cd /usr/local/src/dovecot && git checkout $DOVECOT
+RUN cd /usr/local/src && wget http://www.cpan.org/src/5.0/perl-$PERL.tar.gz
+RUN cd /usr/local/src && tar -xzf perl-$PERL.tar.gz
+RUN cd /usr/local/src/perl-$PERL && ./Configure -des -Dprefix=/usr/local &&make install
+RUN rm /usr/local/src/perl-$PERL.tar.gz
+RUN rm -r /usr/local/src/perl-$PERL
+RUN cd /usr/local/src && wget https://dovecot.org/releases/$DOVECOT_BASE/dovecot-$DOVECOT.tar.gz
+RUN cd /usr/local/src && tar -xzf dovecot-$DOVECOT.tar.gz 
+RUN rm /usr/local/src/dovecot-$DOVECOT.tar.gz 
+RUN mv /usr/local/src/dovecot-$DOVECOT /usr/local/src/dovecot
 
-RUN cd /usr/local/src/dovecot && ./autogen.sh && ./configure --enable-maintainer-mode --enable-devel-checks --with-zlib
+RUN cd /usr/local/src/dovecot && ./configure --enable-maintainer-mode --enable-devel-checks --with-zlib
 RUN cd /usr/local/src/dovecot && make clean install
 
 ADD dovecot_config/ /usr/local/etc/
